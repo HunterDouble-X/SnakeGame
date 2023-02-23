@@ -2,7 +2,8 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from turtle import Screen, Turtle
+from turtle import Screen
+from Snake import Snake
 import time
 
 ### Screen Setup ###
@@ -12,34 +13,23 @@ Screen.setup(width=600, height=600)
 Screen.bgcolor('black')
 Screen.tracer(0)
 
-SnakeStartingPosition = [(0,0),(-20,0),(-40,0)]
-SnakeLength = []
 
+Snake = Snake()
+Screen.listen()
 
-
-for positions in SnakeStartingPosition:
-    Snakes = Turtle()
-    Snakes.shape('square')
-    Snakes.color('white')
-    Snakes.penup()
-    Snakes.goto(positions)
-    SnakeLength.append(Snakes)
-
-
+Screen.onkey(Snake.Up, "Up")
+Screen.onkey(Snake.Down, "Down")
+Screen.onkey(Snake.Left, "Left")
+Screen.onkey(Snake.Right, "Right")
 
 game_is_on = True
 
 while game_is_on:
     Screen.update()
     time.sleep(0.8)
-    Snakehead = SnakeLength[0]
-    for Snake in SnakeLength[1:]:
-        Snake.setx(Snakehead.xcor())
-        Snake.sety(Snakehead.ycor())
-        Snakehead.forward(30)
-        Snakehead.left(90)
 
-
+    Snake.snakeMove()
+    Snake.Up()
 
 
 
