@@ -9,6 +9,7 @@ class Snake:
     def __init__(self):
         self.snakeLength = []
         self.createSnake()
+        self.lastPressedKey = 0
 
 
 
@@ -25,35 +26,38 @@ class Snake:
 
     def snakeMove(self):
             Snakehead = self.snakeLength[0]
-            for Snake in self.snakeLength[1:]:
-                Snake.setx(Snakehead.xcor())
-                Snake.sety(Snakehead.ycor())
-                Snakehead.forward(MOVEDISTANCE)
+            snakeBody = self.snakeLength[1:]
+
+            positionHolder = 0
+            counter = 1
+            for body in snakeBody:
+                ## Get current Position
+                currentPosition = body.pos()
+                futurePosition = self.snakeLength[counter - 1].pos()
+
+                if positionHolder == 0:
+                    positionHolder = currentPosition
+                    body.setpos(futurePosition)
+
+                else:
+                    body.setpos(positionHolder)
+                    positionHolder = currentPosition
+
+
+            Snakehead.forward(MOVEDISTANCE)
 
     def Up(self):
         Snakehead = self.snakeLength[0]
-        for Snake in self.snakeLength[1:]:
-            Snake.setx(Snakehead.xcor())
-            Snake.sety(Snakehead.ycor())
-            Snake.setheading(90)
+        Snakehead.setheading(90)
 
     def Down(self):
         Snakehead = self.snakeLength[0]
-        for Snake in self.snakeLength[1:]:
-            Snake.setx(Snakehead.xcor())
-            Snake.sety(Snakehead.ycor())
-            Snake.setheading(270)
+        Snakehead.setheading(270)
 
     def Left(self):
         Snakehead = self.snakeLength[0]
-        for Snake in self.snakeLength[1:]:
-            Snake.setx(Snakehead.xcor())
-            Snake.sety(Snakehead.ycor())
-            Snake.setheading(0)
+        Snakehead.setheading(180)
 
     def Right(self):
         Snakehead = self.snakeLength[0]
-        for Snake in self.snakeLength[1:]:
-            Snake.setx(Snakehead.xcor())
-            Snake.sety(Snakehead.ycor())
-            Snake.setheading(180)
+        Snakehead.setheading(0)

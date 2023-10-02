@@ -24,12 +24,15 @@ Screen.onkey(Snake.Right, "Right")
 
 game_is_on = True
 
+
+
+
 while game_is_on:
     Screen.update()
     time.sleep(0.8)
 
     Snake.snakeMove()
-    Snake.Up()
+    #Snake.Up()
 
 
 
