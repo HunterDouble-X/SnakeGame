@@ -10,6 +10,7 @@ class Snake:
         self.snakeLength = []
         self.createSnake()
         self.lastPressedKey = 0
+        self.position = 0
 
 
 
@@ -17,16 +18,29 @@ class Snake:
 
         for positions in SNAKESTARTINGPOSITION:
             Snakes = Turtle()
-            Snakes.shape('square')
-            Snakes.color('white')
+            Snakes.shape('circle')
+            Snakes.color('green')
             Snakes.penup()
             Snakes.goto(positions)
             self.snakeLength.append(Snakes)
 
 
+    def singleSnake(self):
+
+        positions = self.snakeLength[-1].pos()
+        Snakes = Turtle()
+        Snakes.shape('circle')
+        Snakes.color('green')
+        Snakes.penup()
+        Snakes.goto(positions)
+        self.snakeLength.append(Snakes)
+
+
+
     def snakeMove(self):
             Snakehead = self.snakeLength[0]
             snakeBody = self.snakeLength[1:]
+            self.position = Snakehead.pos()
 
             positionHolder = 0
             counter = 1
@@ -44,20 +58,25 @@ class Snake:
                     positionHolder = currentPosition
 
 
+
             Snakehead.forward(MOVEDISTANCE)
 
     def Up(self):
         Snakehead = self.snakeLength[0]
         Snakehead.setheading(90)
+        self.position = Snakehead.pos()
 
     def Down(self):
         Snakehead = self.snakeLength[0]
         Snakehead.setheading(270)
+        self.position = Snakehead.pos()
 
     def Left(self):
         Snakehead = self.snakeLength[0]
         Snakehead.setheading(180)
+        self.position = Snakehead.pos()
 
     def Right(self):
         Snakehead = self.snakeLength[0]
         Snakehead.setheading(0)
+        self.position = Snakehead.pos()

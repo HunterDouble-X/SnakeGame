@@ -5,6 +5,7 @@
 from turtle import Screen
 from Snake import Snake
 import time
+import Game
 
 ### Screen Setup ###
 Screen = Screen()
@@ -23,16 +24,29 @@ Screen.onkey(Snake.Left, "Left")
 Screen.onkey(Snake.Right, "Right")
 
 game_is_on = True
+gameEngine = Game.gameEngine()
 
-
-
+gameEngine.createFood()
 
 while game_is_on:
     Screen.update()
     time.sleep(0.8)
 
+
+    if (Snake.position.__abs__() >= 300) or (Snake.position.__abs__() <= -300):
+        print("Out of Bounds!")
+        break
+
+
+    if Snake.position == gameEngine.foodPosition:
+        print("Scored a Point!")
+        Snake.singleSnake()
+        gameEngine.createFood()
+    print("Moving!")
+    print(Snake.position)
     Snake.snakeMove()
-    #Snake.Up()
+
+
 
 
 
