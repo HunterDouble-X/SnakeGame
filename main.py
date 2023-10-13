@@ -5,7 +5,7 @@
 from turtle import Screen
 from Snake import Snake
 import time
-import Game
+from Game import gameEngine
 
 ### Screen Setup ###
 Screen = Screen()
@@ -24,26 +24,41 @@ Screen.onkey(Snake.Left, "Left")
 Screen.onkey(Snake.Right, "Right")
 
 game_is_on = True
-gameEngine = Game.gameEngine()
 
-gameEngine.createFood()
+
+
+foodisVisible = False
+
+food = gameEngine()
+food.createFood(food.randomPosition())
+food.hideFood()
+foodPosition = food.foodPosition()
 
 while game_is_on:
     Screen.update()
     time.sleep(0.8)
+    print("Food is at: %s" % (str(food.foodLocation)))
 
 
-    if (Snake.position.__abs__() >= 300) or (Snake.position.__abs__() <= -300):
+
+    if foodisVisible == False:
+        food.showFood()
+        foodisVisible = True
+
+    elif (Snake.snakeLength[0].pos().__abs__() == (300,300)) or (Snake.snakeLength[0].pos() == (-300,-300)):
         print("Out of Bounds!")
         break
 
 
-    if Snake.position == gameEngine.foodPosition:
-        print("Scored a Point!")
-        Snake.singleSnake()
-        gameEngine.createFood()
+    #elif str(Snake.snakeLength[0].pos()) == str(foodPosition):
+    #    print("Scored a Point!")
+    ##    Snake.singleSnake()
+     #   food.hideFood()
+     #   foodisVisible = False
+
+
     print("Moving!")
-    print(Snake.position)
+    print(Snake.snakeLength[0].pos())
     Snake.snakeMove()
 
 

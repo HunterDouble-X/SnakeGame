@@ -1,7 +1,7 @@
 from turtle import Turtle
 import time
-
-SNAKESTARTINGPOSITION = [(0, 0), (-20, 0), (-40, 0)]
+#(-20, 0), (-40, 0
+SNAKESTARTINGPOSITION = [(0, 0)]
 MOVEDISTANCE = 20
 
 class Snake:
@@ -30,7 +30,7 @@ class Snake:
         positions = self.snakeLength[-1].pos()
         Snakes = Turtle()
         Snakes.shape('circle')
-        Snakes.color('green')
+        Snakes.color('red')
         Snakes.penup()
         Snakes.goto(positions)
         self.snakeLength.append(Snakes)
@@ -45,6 +45,7 @@ class Snake:
             positionHolder = 0
             counter = 1
             for body in snakeBody:
+
                 ## Get current Position
                 currentPosition = body.pos()
                 futurePosition = self.snakeLength[counter - 1].pos()
@@ -56,6 +57,7 @@ class Snake:
                 else:
                     body.setpos(positionHolder)
                     positionHolder = currentPosition
+                counter += 1
 
 
 
