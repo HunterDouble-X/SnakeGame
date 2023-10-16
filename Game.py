@@ -11,9 +11,8 @@ import random
 class gameEngine:
 
     def __init__(self):
-        self.food = []
         self.random = 0
-        self.foodLocation = ()
+        self.foodLocation = 0
         self.food = Turtle()
 
 #### Foood
@@ -38,7 +37,11 @@ class gameEngine:
         self.food.ht()
 
     def foodPosition(self):
-        self.foodLocation = (round(self.random[0],2),round(self.random[1],2))
+        Y = round(self.random[1],2)
+        X = round(self.random[0],2)
+        self.food.goto(X,Y)
+        self.foodLocation = self.food.pos()
+        return self.foodLocation
 
 
 

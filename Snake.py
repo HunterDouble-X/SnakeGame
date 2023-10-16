@@ -1,7 +1,7 @@
 from turtle import Turtle
 import time
 #(-20, 0), (-40, 0
-SNAKESTARTINGPOSITION = [(0, 0)]
+SNAKESTARTINGPOSITION = [(0, 0),(-20,0),(-40,0)]
 MOVEDISTANCE = 20
 
 class Snake:
@@ -11,6 +11,7 @@ class Snake:
         self.createSnake()
         self.lastPressedKey = 0
         self.position = 0
+        self.snakeHead = 0
 
 
 
@@ -38,30 +39,33 @@ class Snake:
 
 
     def snakeMove(self):
-            Snakehead = self.snakeLength[0]
-            snakeBody = self.snakeLength[1:]
-            self.position = Snakehead.pos()
 
-            positionHolder = 0
-            counter = 1
-            for body in snakeBody:
+        snakeBody = self.snakeLength
+        counter = 0
+        currentPosition = 0
+        futurePosition = 0
 
-                ## Get current Position
-                currentPosition = body.pos()
-                futurePosition = self.snakeLength[counter - 1].pos()
+        for bodyPart in snakeBody:
+            if counter == 0:
+                print("I am the head")
+                print("I am at: %s" % (str(bodyPart.pos())))
+                futurePosition = bodyPart.pos()
+                print("The next piece should be moving towards: %s " % (str(futurePosition)))
+                bodyPart.forward(MOVEDISTANCE)
+                self.snakeHead = bodyPart.pos()
+                print("I am moving towards: %s" % (str(self.snakeHead)))
+            else:
+                print("I am Piece: %i" % (counter))
+                currentPosition = bodyPart.pos()
+                print("My Current Position is: %s" % str((currentPosition)))
+                bodyPart.goto(futurePosition)
+                print("Moving Towards: %s" % str((futurePosition)))
+                futurePosition = currentPosition
+                print("The next piece should be moving towards: %s" % (str(futurePosition)))
 
-                if positionHolder == 0:
-                    positionHolder = currentPosition
-                    body.setpos(futurePosition)
 
-                else:
-                    body.setpos(positionHolder)
-                    positionHolder = currentPosition
-                counter += 1
+            counter += 1
 
-
-
-            Snakehead.forward(MOVEDISTANCE)
 
     def Up(self):
         Snakehead = self.snakeLength[0]
